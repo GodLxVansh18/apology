@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: #ff2e63;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.6s ease;
+}
+
+h1 { font-size: 2.5em; }
+p { font-size: 1.3em; max-width: 650px; }
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 2px solid #ff2e63;
+  background: transparent;
+  color: #ff2e63;
+  cursor: pointer;
+}
+button:hover {
+  background: #ff2e63;
+  color: white;
+}
+
+/* hearts */
+.heart {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: #ff2e63;
+  transform: rotate(45deg);
+  animation: float 5s linear infinite;
+}
+.heart::before,.heart::after{
+  content:'';
+  width:12px;height:12px;
+  background:#ff2e63;
+  border-radius:50%;
+  position:absolute;
+}
+.heart::before{top:-6px;}
+.heart::after{left:-6px;}
+
+@keyframes float {
+  0%{bottom:-10%;opacity:0;}
+  50%{opacity:1;}
+  100%{bottom:110%;opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="slide" id="s0">
+  <h1>Hey ❤️</h1>
+  <p>I made this just to speak honestly from my heart.</p>
+  <button onclick="next()">Start</button>
+</div>
+
+<div class="slide" id="s1">
+  <h1>I hurt you 💔</h1>
+  <p>And I’ve been thinking about it a lot.</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide" id="s2">
+  <h1>I regret it 😔</h1>
+  <p>You didn’t deserve that from me.</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide" id="s3">
+  <h1>Truth is...</h1>
+  <p onclick="this.innerHTML='I should have been more careful with your feelings.'">
+    Tap to reveal
+  </p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="slide" id="s4">
+  <h1>You matter ❤️</h1>
+  <p>More than pride. More than mistakes.</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<!-- DECISION -->
+<div class="slide" id="s5">
+  <h1>What do you feel? ❤️</h1>
+  <p>This is your honest space. No pressure.</p>
+
+  <button onclick="forgive()">I forgive you ❤️</button>
+  <button onclick="notYet()">Not yet 💔</button>
+</div>
+
+<!-- FORGIVEN PATH -->
+<div class="slide" id="forgive">
+  <h1>Thank you ❤️</h1>
+  <p>
+    That means a lot to me.<br><br>
+    I won’t take this lightly.<br>
+    I’ll make sure my actions match my words.
+  </p>
+</div>
+
+<div class="slide" id="forgive2">
+  <h1>You made me smile again ❤️</h1>
+  <p>
+    I don’t want perfect moments.<br>
+    I just want real ones with you.<br><br>
+    Thank you for giving me a chance.
+  </p>
+</div>
+
+<!-- NOT YET PATH -->
+<div class="slide" id="notyet">
+  <h1>I understand 💔</h1>
+  <p>
+    I respect your feelings.<br><br>
+    I won’t rush you or ask again.<br>
+    I just want to become better.
+  </p>
+</div>
+
+<div class="slide" id="growth">
+  <h1>I’ll work on myself ❤️</h1>
+  <p>
+    Not to convince you…<br>
+    but to deserve peace with you again someday.
+  </p>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+
+function show(i){
+  slides.forEach((s,idx)=>{
+    s.style.transform = `translateX(${(idx-i)*100}%)`;
+  });
+}
+function next(){ current++; show(current); }
+
+function forgive(){
+  current = 6;
+  show(current);
+}
+
+function notYet(){
+  current = 8;
+  show(current);
+}
+
+/* hearts */
+function heart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+}
+setInterval(heart,300);
+
+show(0);
+</script>
+
+</body>
+</html>
